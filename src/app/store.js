@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import testSlice from '../features/testSlice'
-
+import movieReducer from '../features/moviesSlice';
 export const store = configureStore( {
 	reducer: {
-		test: testSlice
+		movies: movieReducer
 	}
 })

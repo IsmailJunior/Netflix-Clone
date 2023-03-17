@@ -1,27 +1,30 @@
-import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import {selectTitle, selectBanner, selectDescription} from '../features/moviesSlice'
+import styled from 'styled-components';
 export const Banner = () =>
 {
+
+	const title = useSelector( selectTitle )
+	const banner = useSelector( selectBanner )
+	const description = useSelector( selectDescription )
 	
 	const truncate = (string, number) => {
 	  return string?.length > number ? string.substr(0, number - 1) + ' ...' : string
 	}
-	
+
+
   return (
 	  <>
-		  <Header>
+		  <Header style={{backgroundImage: `url('https://image.tmdb.org/t/p/original/${banner}')`}}>
 			  <Container>
 				  <Content>
-					<Title>Movie Name</Title>
+					  <Title>
+						  {title}
+					  </Title>
 					  <Button>Play</Button>
 					  <Button>My List</Button>
 					  <Description>
-						  { truncate( `Hi guys whasokdspkcddcslckdmds
-						  Hi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmds
-						  Hi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmds
-						  Hi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmds
-						  Hi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmds
-						  Hi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmdsHi guys whasokdspkcddcslckdmds
-						 `, 100) }
+						  { truncate( description, 200) }
 					  </Description>
 				  </Content>
 			  </Container>
@@ -34,7 +37,6 @@ export const Banner = () =>
 const Header = styled.header`
 	position: relative;
 	height: 400px;
-	background-image: url('https://i.ytimg.com/vi/11DLps70XSU/maxresdefault.jpg');
 	background-repeat:no-repeat;
     background-size: cover;
 	object-fit: contain;
