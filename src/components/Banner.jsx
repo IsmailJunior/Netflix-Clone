@@ -1,6 +1,7 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import {selectTitle, selectBanner, selectDescription} from '../features/moviesSlice'
 import styled from 'styled-components';
+import { Header } from './Header'
 export const Banner = () =>
 {
 
@@ -12,10 +13,9 @@ export const Banner = () =>
 	  return string?.length > number ? string.substr(0, number - 1) + ' ...' : string
 	}
 
-
   return (
 	  <>
-		  <Header style={{backgroundImage: `url('https://image.tmdb.org/t/p/original/${banner}')`}}>
+		  <Header banner={banner} >
 			  <Container>
 				  <Content>
 					  <Title>
@@ -29,21 +29,10 @@ export const Banner = () =>
 				  </Content>
 			  </Container>
 			  <Fade />
-		</Header>
+			  </Header>
 	  </>
   )
 }
-
-const Header = styled.header`
-	position: relative;
-	height: 400px;
-	background-repeat:no-repeat;
-    background-size: cover;
-	object-fit: contain;
-	background-position: center center;
-	width: 100vw;
-	color: white;
-`;
 
 const Container = styled.div`
 	margin-left: 20px;
