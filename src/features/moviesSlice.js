@@ -35,7 +35,12 @@ const movieSlice = createSlice( {
 			} )
 			.addCase( getTrending.fulfilled, ( state, action ) =>
 			{
-				const { original_title, name, title, overview, backdrop_path } = action.payload;
+				const original_title = action.payload?.original_title;
+				const title = action.payload?.title;
+				const name = action.payload?.name;
+				const overview = action.payload?.overview;
+				const backdrop_path = action.payload?.backdrop_path;
+
 				state.title = original_title || name || title;
 				state.description = overview;
 				state.banner = backdrop_path;
