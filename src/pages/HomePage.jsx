@@ -2,7 +2,8 @@ import request from '../features/request'
 import { Banner } from '../components/Banner';
 import {Row} from '../components/Row'
 
-export const HomePage = () => {
+export const HomePage = () =>
+{
   return (
     <>
       <Banner />

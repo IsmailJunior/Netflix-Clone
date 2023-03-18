@@ -1,9 +1,12 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
+import {Link} from 'react-router-dom'
 
 
 export const Navigation = () =>
 {
+	const logo = 'https://th.bing.com/th/id/R.9f316495a8a8657ffa47ee68703ffaf3?rik=dYC1FMGLhnRWvA&pid=ImgRaw&r=0'
+	const avatar = 'https://th.bing.com/th/id/R.5d0f9ca26f942f0eda69ffd4dc1710dc?rik=OI3uYVp0osJ3jw&pid=ImgRaw&r=0'
 	const [ showNavbar, setShowNavbar ] = useState( false )
 
 const transitionNavbarHandler = () =>
@@ -25,9 +28,14 @@ useEffect( () =>
 	
 	return (
 	  <Container>
-	<Navbar style={{background: showNavbar ? 'black' : 'transparent'}}>
-		 <Logo src='https://th.bing.com/th/id/R.9f316495a8a8657ffa47ee68703ffaf3?rik=dYC1FMGLhnRWvA&pid=ImgRaw&r=0'/>
-		  <Avatar src='https://th.bing.com/th/id/R.5d0f9ca26f942f0eda69ffd4dc1710dc?rik=OI3uYVp0osJ3jw&pid=ImgRaw&r=0' />
+			<Navbar style={ { background: showNavbar ? 'black' : 'transparent' } }>
+				<Link to='/'>
+					<Logo src={logo} />
+				</Link>
+				{/* <Avatar src={avatar} /> */ }
+				<Link to='/login'>
+					<Button>Sign In</Button>
+				</Link>
 	</Navbar>
 	  </Container>
   )
@@ -59,3 +67,12 @@ const Avatar = styled.img`
 	margin: 0 15px;
 	cursor: pointer;
 `
+
+const Button = styled.button`
+	margin: 0 15px;
+	padding: 10px 20px;
+	font-size: 1rem;
+	background-color: #e50914;
+	cursor: pointer;
+	border: none;
+`;
