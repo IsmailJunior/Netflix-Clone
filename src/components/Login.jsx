@@ -18,8 +18,6 @@ export const Login = ({loginHandler}) =>
   )
 }
 
-
-
 const Heading = styled.h1`
 		font-size: 3.125rem;
 		margin-bottom: 20px;

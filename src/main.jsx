@@ -1,11 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import App from './App'
 import './index.css'
 import {Provider} from 'react-redux'
 import { store } from './app/store'
-import {getTrending} from './features/moviesSlice'
+import { getTrending } from './features/movies/moviesSlice'
 
 store.dispatch( getTrending() )
 

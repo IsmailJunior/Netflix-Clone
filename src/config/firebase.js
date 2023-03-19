@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 const firebaseConfig = {
 	apiKey: "AIzaSyBa4rN3ujPp25Rqr7aXOhzacGPgB6CeEhM",
 	authDomain: "netflix-c75e3.firebaseapp.com",
@@ -9,3 +11,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp( firebaseConfig );
+export const bank = getFirestore( app );
+export const auth = getAuth( app );

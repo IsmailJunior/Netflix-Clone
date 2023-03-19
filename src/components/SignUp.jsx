@@ -1,14 +1,64 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux'
+import {register, signIn} from '../features/user/userSlice'
 import styled from 'styled-components'
 
-export const SignUp = () => {
+
+export const SignUp = () =>
+{
+	const dispatch = useDispatch();
+	
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	
+	const onEmailChangedHandler = (e) => setEmail(e.target.value)
+	const onPasswordChangedHandler = (e) => setPassword(e.target.value)
+	
+	const canSave = [email, password].every(Boolean)
+
+	const registerHandler = (event) =>
+	{
+		event.preventDefault();
+		if ( !canSave ) return
+		try
+		{
+			dispatch( register( { email: email, password: password } ) )
+			setEmail( ' ' )
+			setPassword( ' ' )
+			
+		} catch ( error )
+		{
+			console.error(error)
+		}
+	}
+
+	const loginHandler = async (event) =>
+	{
+		event.preventDefault();
+		if ( !canSave ) return
+		
+		try
+		{
+			dispatch( signIn( { email: email, password: password } ) )
+			setEmail( '' )
+			setPassword('')
+		} catch ( error )
+		{
+			console.error(error)
+		}
+	}
+
   return (
 		  <Control>
 			  <Form>
 				  <Heading>Sign In</Heading>
-				  <Input type='email' placeholder='Email' />
-				  <Input type='password' placeholder='Password' />
-			  <Button type='button'>Sign In</Button>
-			  <Subtitle><Monotitle>New to Netflix?</Monotitle> Sign Up now.</Subtitle>
+				  <Input value={email} onChange={onEmailChangedHandler} type='email' placeholder='Email' />
+				  <Input value={password} password={password} onChange={onPasswordChangedHandler}  type='password' placeholder='Password' />
+			  <Button type='submit' onClick={loginHandler}>Sign In</Button>
+			  <Subtitle>
+				  <Monotitle>New to Netflix? </Monotitle>
+				  <Link onClick={registerHandler}>Sign Up now.</Link>
+			  </Subtitle>
 			  </Form>
 		  </Control>
   )
@@ -62,4 +112,12 @@ const Subtitle = styled.h4`
 
 const Monotitle = styled.span`
 	color: gray;
+`;
+
+const Link = styled.span`
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 `;

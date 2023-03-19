@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import {selectTitle, selectBanner, selectDescription} from '../features/moviesSlice'
+import {selectTitle, selectBanner, selectDescription} from '../features/movies/moviesSlice'
 import styled from 'styled-components';
 import { Header } from './Header'
 export const Banner = () =>

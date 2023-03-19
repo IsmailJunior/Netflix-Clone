@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from '../config/axios';
-import requests from './request';
+import axios from '../../config/axios';
+import requests from '../request';
 
 const initialState = {
 	title: 'Movie Title',
