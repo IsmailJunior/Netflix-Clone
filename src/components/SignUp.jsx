@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'
-import {register, signIn} from '../features/user/userSlice'
+import {useNavigate} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import {register, signIn, selectUser, selectStatus} from '../features/user/userSlice'
 import styled from 'styled-components'
 
 
 export const SignUp = () =>
 {
+	const navigate = useNavigate();
+	const user = useSelector( selectUser )
+	const status = useSelector(selectStatus)
 	const dispatch = useDispatch();
 	
 	const [email, setEmail] = useState('')
@@ -20,32 +24,20 @@ export const SignUp = () =>
 	{
 		event.preventDefault();
 		if ( !canSave ) return
-		try
-		{
-			dispatch( register( { email: email, password: password } ) )
-			setEmail( ' ' )
-			setPassword( ' ' )
-			
-		} catch ( error )
-		{
-			console.error(error)
-		}
+		dispatch( register( { email: email, password: password } ) )
+		setEmail( ' ' )
+		setPassword( ' ' )
+		navigate('/')
 	}
 
-	const loginHandler = async (event) =>
+	const loginHandler = (event) =>
 	{
 		event.preventDefault();
 		if ( !canSave ) return
-		
-		try
-		{
-			dispatch( signIn( { email: email, password: password } ) )
-			setEmail( '' )
-			setPassword('')
-		} catch ( error )
-		{
-			console.error(error)
-		}
+		dispatch( signIn( { email: email, password: password } ) )
+		setEmail( '' )
+		setPassword( '' )
+		navigate('/')
 	}
 
   return (

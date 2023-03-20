@@ -1,22 +1,15 @@
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {selectUser, logout} from '../features/user/userSlice'
-
+import {Avatar} from '../components/Avatar'
 export const Navigation = () =>
 {
-	const dispatch = useDispatch()
 	const user = useSelector( selectUser )
 	const logo = 'https://th.bing.com/th/id/R.9f316495a8a8657ffa47ee68703ffaf3?rik=dYC1FMGLhnRWvA&pid=ImgRaw&r=0'
-	const avatar = 'https://th.bing.com/th/id/R.5d0f9ca26f942f0eda69ffd4dc1710dc?rik=OI3uYVp0osJ3jw&pid=ImgRaw&r=0'
 	const [ showNavbar, setShowNavbar ] = useState( false )
 
-	const logoutHandler = (event) =>
-	{
-		event.preventDefault()
-		dispatch( logout() );
-	}
 const transitionNavbarHandler = () =>
 {
 	if ( window.scrollY > 100 )
@@ -33,9 +26,7 @@ useEffect( () =>
 	window.addEventListener( 'scroll', transitionNavbarHandler )
 	return () => window.removeEventListener('scroll', transitionNavbarHandler)
 }, [])
-	
-	const authorization = user ? (<Avatar src={avatar} /> ): <Link to='/login'><Button>Sign In</Button></Link>
-	
+		
 	return (
 	  <Container>
 			<Navbar style={ { background: showNavbar ? 'black' : 'transparent' } }>
@@ -43,7 +34,9 @@ useEffect( () =>
 					<Logo src={logo} />
 				</Link>
 				{ user ? <>
-					<Avatar src={ avatar } /> <Button type='button' onClick={logoutHandler}>Logout</Button>
+					<Link to='/profile'>
+						<Avatar />
+					</Link>
 				</>
 					: <Link to='/login'><Button>Sign In</Button></Link>
 				}
@@ -72,12 +65,7 @@ const Logo = styled.img`
 	margin: 0 15px;
 	cursor: pointer;
 `
-const Avatar = styled.img`
-	width: 30px;
-	object-fit: contain;
-	margin: 0 15px;
-	cursor: pointer;
-`
+
 
 const Button = styled.button`
 	margin: 0 15px;
